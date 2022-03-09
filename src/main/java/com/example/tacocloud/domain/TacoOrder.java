@@ -6,9 +6,16 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class TacoOrder {
+
+    private static final long serialVersionUID = 1L;
+
+    private Long id;
+
+    private Date placedAt;
 
     @NotBlank(message="Delivery name is required")
     private String deliveryName;
@@ -37,6 +44,22 @@ public class TacoOrder {
     private List<Taco> tacos = new ArrayList<>();
 
     public TacoOrder() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Date getPlacedAt() {
+        return placedAt;
+    }
+
+    public void setPlacedAt(Date placedAt) {
+        this.placedAt = placedAt;
     }
 
     public String getDeliveryName() {
