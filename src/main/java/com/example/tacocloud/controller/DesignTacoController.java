@@ -21,6 +21,7 @@ import static com.example.tacocloud.domain.Ingredient.Type;
 @RequestMapping("/design")
 @SessionAttributes("tacoOrder")
 public class DesignTacoController {
+    private static final org.slf4j.Logger LOGGER = org.slf4j.LoggerFactory.getLogger(DesignTacoController.class);
 
     @ModelAttribute
     public void addIngredientsToModel(Model model){
