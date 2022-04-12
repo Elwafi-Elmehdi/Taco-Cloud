@@ -1,6 +1,11 @@
 package com.example.tacocloud.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Ingredient {
+    @Id
     private final String id;
     private final String name;
     private final Type type;
