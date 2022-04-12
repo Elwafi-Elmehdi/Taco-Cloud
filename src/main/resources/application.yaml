@@ -1,5 +1,7 @@
-
 spring:
-  datasource:
-    generate-unique-name: false
-    name: tacocloud
+  data:
+    cassandra:
+      keyspace-name: tacocloud
+      schema-action: recreate
+      local-datacenter: datacenter1
+      port: 9043

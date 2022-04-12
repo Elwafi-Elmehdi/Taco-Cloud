@@ -1,22 +1,25 @@
 package com.example.tacocloud.domain;
 
+import com.datastax.oss.driver.api.core.uuid.Uuids;
 import org.hibernate.validator.constraints.CreditCardNumber;
+import org.springframework.data.cassandra.core.mapping.Column;
+import org.springframework.data.cassandra.core.mapping.PrimaryKey;
+import org.springframework.data.cassandra.core.mapping.Table;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
-@Entity
-public class TacoOrder {
-
+@Table("orders")
+public class TacoOrder implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
-    private Long id;
+    @PrimaryKey
+    private UUID id = Uuids.timeBased();
 
     private Date placedAt;
 
@@ -43,17 +46,17 @@ public class TacoOrder {
 
     @Digits(integer = 3, fraction = 0, message = "Invalid CVV")
     private String ccCVV;
-
-    private List<Taco> tacos = new ArrayList<>();
+    @Column("tacos")
+    private List<TacoUDT> tacos = new ArrayList<>();
 
     public TacoOrder() {
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -129,15 +132,15 @@ public class TacoOrder {
         this.ccCVV = ccCVV;
     }
 
-    public List<Taco> getTacos() {
+    public List<TacoUDT> getTacos() {
         return tacos;
     }
 
-    public void setTacos(List<Taco> tacos) {
+    public void setTacos(List<TacoUDT> tacos) {
         this.tacos = tacos;
     }
 
-    public void addTaco(Taco taco) {
+    public void addTaco(TacoUDT taco) {
         this.tacos.add(taco);
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Component
 public class IngredientByIdConverter implements Converter<String, Optional<Ingredient>> {
@@ -20,6 +21,6 @@ public class IngredientByIdConverter implements Converter<String, Optional<Ingre
 
     @Override
     public Optional<Ingredient> convert(String id) {
-        return ingredientRepo.findById(id);
+        return ingredientRepo.findById(UUID.fromString(id));
     }
 }

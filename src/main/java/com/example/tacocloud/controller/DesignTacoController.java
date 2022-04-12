@@ -3,6 +3,7 @@ package com.example.tacocloud.controller;
 import com.example.tacocloud.domain.Ingredient;
 import com.example.tacocloud.domain.Taco;
 import com.example.tacocloud.domain.TacoOrder;
+import com.example.tacocloud.domain.TacoUDT;
 import com.example.tacocloud.repository.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -58,7 +59,7 @@ public class DesignTacoController {
         if(errors.hasErrors()){
             return "design";
         }
-        tacoOrder.addTaco(taco);
+        tacoOrder.addTaco(new TacoUDT(taco.getName(),taco.getIngredients()));
         LOGGER.info("Processing raco : {}",taco);
         return "redirect:/orders/current";
     }
