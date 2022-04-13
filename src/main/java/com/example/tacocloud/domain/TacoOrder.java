@@ -1,10 +1,8 @@
 package com.example.tacocloud.domain;
 
-import com.datastax.oss.driver.api.core.uuid.Uuids;
 import org.hibernate.validator.constraints.CreditCardNumber;
-import org.springframework.data.cassandra.core.mapping.Column;
-import org.springframework.data.cassandra.core.mapping.PrimaryKey;
-import org.springframework.data.cassandra.core.mapping.Table;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotBlank;
@@ -14,12 +12,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-
-@Table("orders")
+@Document
 public class TacoOrder implements Serializable {
     private static final long serialVersionUID = 1L;
-    @PrimaryKey
-    private UUID id = Uuids.timeBased();
+    @Id
+    private String id;
 
     private Date placedAt;
 
@@ -46,17 +43,17 @@ public class TacoOrder implements Serializable {
 
     @Digits(integer = 3, fraction = 0, message = "Invalid CVV")
     private String ccCVV;
-    @Column("tacos")
-    private List<TacoUDT> tacos = new ArrayList<>();
+
+    private List<Taco> tacos = new ArrayList<>();
+
+    public void addTaco(Taco taco) {
+        this.tacos.add(taco);
+    }
 
     public TacoOrder() {
     }
 
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
+    public TacoOrder(String id) {
         this.id = id;
     }
 
@@ -132,15 +129,19 @@ public class TacoOrder implements Serializable {
         this.ccCVV = ccCVV;
     }
 
-    public List<TacoUDT> getTacos() {
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public List<Taco> getTacos() {
         return tacos;
     }
 
-    public void setTacos(List<TacoUDT> tacos) {
+    public void setTacos(List<Taco> tacos) {
         this.tacos = tacos;
-    }
-
-    public void addTaco(TacoUDT taco) {
-        this.tacos.add(taco);
     }
 }

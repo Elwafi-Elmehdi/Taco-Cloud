@@ -10,5 +10,5 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface IngredientRepository extends CrudRepository<Ingredient, UUID> {
+public interface IngredientRepository extends CrudRepository<Ingredient, String> {
 }

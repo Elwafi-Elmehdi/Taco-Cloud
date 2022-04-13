@@ -21,6 +21,6 @@ public class IngredientByIdConverter implements Converter<String, Optional<Ingre
 
     @Override
     public Optional<Ingredient> convert(String id) {
-        return ingredientRepo.findById(UUID.fromString(id));
+        return ingredientRepo.findById(id);
     }
 }
