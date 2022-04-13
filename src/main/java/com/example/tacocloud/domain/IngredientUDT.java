@@ -1,8 +1,5 @@
 package com.example.tacocloud.domain;
 
-import org.springframework.data.cassandra.core.mapping.UserDefinedType;
-
-@UserDefinedType("ingredients")
 public class IngredientUDT {
     private final String name;
     private final Ingredient.Type type;

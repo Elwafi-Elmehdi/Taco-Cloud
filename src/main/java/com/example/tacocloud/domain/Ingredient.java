@@ -1,10 +1,11 @@
 package com.example.tacocloud.domain;
 
-import org.springframework.data.cassandra.core.mapping.PrimaryKey;
-import org.springframework.data.cassandra.core.mapping.Table;
-@Table("ingredients")
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document(collection = "ingredients")
 public class Ingredient {
-    @PrimaryKey
+    @Id
     private final String id;
     private final String name;
     private final Type type;
