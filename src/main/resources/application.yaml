@@ -1,6 +1,22 @@
+server:
+  port: 8443
+  ssl:
+    key-store: file:///home/mehdi/mykeys.jks
+    key-password: mehdielwafi
+    key-store-password: mehdielwafi
+
+logging:
+  level:
+    root: warn
+    org.springframework.security: debug
+  file:
+    name: taco-cloud.log
+    path: /var/logs/
+
+taco:
+  orders:
+    pageSize:10
 spring:
-  data:
-    mongodb:
-      host: 'localhost'
-      port: 27017
-      database: 'tacoclouddb'
+  config:
+    activate:
+      on-profile: prod
